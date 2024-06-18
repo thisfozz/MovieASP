@@ -7,22 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
-    <Compile Remove="DataAccess\**" />
-    <Compile Remove="Models\**" />
-    <Compile Remove="Views\**" />
-    <Content Remove="Controllers\**" />
-    <Content Remove="DataAccess\**" />
-    <Content Remove="Models\**" />
-    <Content Remove="Views\**" />
-    <EmbeddedResource Remove="Controllers\**" />
-    <EmbeddedResource Remove="DataAccess\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <EmbeddedResource Remove="Views\**" />
-    <None Remove="Controllers\**" />
-    <None Remove="DataAccess\**" />
-    <None Remove="Models\**" />
-    <None Remove="Views\**" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>

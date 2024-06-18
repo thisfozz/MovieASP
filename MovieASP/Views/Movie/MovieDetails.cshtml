@@ -1,0 +1,53 @@
+﻿@model MovieASP.Models.MovieModel
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+    <body>
+        <div class="container">
+            <h2 class="mt-5 mb-4">Подробная информация о фильме</h2>
+
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="@Model.Image" class="img-fluid rounded-start" alt="Баннер фильма" style="height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h4 class="card-title">@Model.Title</h4>
+                            <p class="card-text"><strong>Жанр:</strong> @Model.Genre</p>
+                            <p class="card-text"><strong>Режиссер:</strong> @Model.Director</p>
+                            <p class="card-text">@Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="/" class="btn btn-primary">Назад к списку фильмов</a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="mt-5 mb-4">Расписание сеансов</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Дата и время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var session in Model.Sessions)
+                        {
+                            <tr>
+                                <td>@session.Time.ToString("dd.MM.yyyy HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
