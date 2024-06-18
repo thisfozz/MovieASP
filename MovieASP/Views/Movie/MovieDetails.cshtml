@@ -26,7 +26,11 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="/" class="btn btn-primary">Назад к списку фильмов</a>
+                    <a href="@Url.Action("Edit", "Movie", new { id = Model.Id })" class="btn btn-primary">Редактировать фильм</a>
+                    <form method="post" action="@Url.Action("Delete", "Movie")">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить фильм?')">Удалить фильм</button>
+                    </form>
                 </div>
             </div>
 
@@ -47,6 +51,7 @@
                         }
                     </tbody>
                 </table>
+                <a href="/" class="btn btn-primary">Назад к списку фильмов</a>
             </div>
         </div>
     </body>

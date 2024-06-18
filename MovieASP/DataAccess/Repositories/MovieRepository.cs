@@ -1,13 +1,14 @@
 ﻿using MovieASP.DataAccess.Entities;
-using static System.Reflection.Metadata.BlobBuilder;
+using MovieASP.Models;
+using System;
 
 namespace MovieASP.DataAccess.Repositories;
 
 public class MovieRepository : IMovieRepository
 {
-    private readonly List<MovieEntity> _movie = new List<MovieEntity>
+    private readonly List<MovieModel> _movie = new List<MovieModel>
     {
-        new MovieEntity
+        new MovieModel
         {
             Id = 1,
             Title = "Майор Гром: Игра",
@@ -23,7 +24,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 2, Time = DateTime.Parse("2024-06-19 21:25"), CinemaId = 1 }
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 2,
             Title = "Министерство неджентльменских дел",
@@ -37,7 +38,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 2, Time = DateTime.Parse("2024-06-19 21:25"), CinemaId = 2 }
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 3,
             Title = "Непослушники",
@@ -53,7 +54,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 3, Time = DateTime.Parse("2024-06-19 20:35"), CinemaId = 3 }
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 4,
             Title = "Игры разума",
@@ -69,7 +70,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 4, Time = DateTime.Parse("2024-06-19 21:00"), CinemaId = 4 }
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 5,
             Title = "Бойцовский клуб",
@@ -86,7 +87,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 5, Time = DateTime.Parse("2024-06-19 23:30"), CinemaId = 5 }
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 6,
             Title = "Джентельмены",
@@ -102,7 +103,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 6, Time = DateTime.Parse("2024-06-19 20:30"), CinemaId = 6 }
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 7,
             Title = "Мстители: Война Бесконечности",
@@ -119,7 +120,7 @@ public class MovieRepository : IMovieRepository
                 new SessionEntity { Id = 7, Time = DateTime.Parse("2024-06-19 22:00"), CinemaId = 7 },
             }
         },
-        new MovieEntity
+        new MovieModel
         {
             Id = 8,
             Title = "Мстители: Финал",
@@ -140,13 +141,38 @@ public class MovieRepository : IMovieRepository
         },
 
     };
-    public MovieEntity[] GetAll()
+
+    public List<MovieModel> GetAll()
     {
-        return _movie.ToArray();
+        return _movie;
     }
 
-    public MovieEntity GetById(int id)
+    public MovieModel GetById(int id)
     {
         return _movie.FirstOrDefault(m => m.Id == id);
+    }
+
+    public void Create(MovieModel model)
+    {
+        _movie.Add(model);
+    }
+
+    public void Delete(int id)
+    {
+        var entity = _movie.FirstOrDefault(x => x.Id == id);
+        if (entity == null) return;
+        _movie.Remove(entity);
+    }
+
+    public void Update(MovieModel model)
+    {
+        var index = _movie.FindIndex(m => m.Id == model.Id);
+        if (index == -1) return;
+
+        _movie[index].Title = model.Title;
+        _movie[index].Director = model.Director;
+        _movie[index].Genre = model.Genre;
+        _movie[index].Description = model.Description;
+        _movie[index].Sessions = model.Sessions;
     }
 }

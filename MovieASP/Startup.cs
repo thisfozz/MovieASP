@@ -6,8 +6,8 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddScoped<IMovieRepository, MovieRepository>().AddScoped<ICinemaRepository, CinemaRepository>();
-
+        services.AddSingleton<IMovieRepository, MovieRepository>()
+            .AddSingleton<ICinemaRepository, CinemaRepository>();
         services.AddMvc();
     }
 

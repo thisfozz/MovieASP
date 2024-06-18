@@ -4,5 +4,5 @@ namespace MovieASP.Models;
 
 public class MoviesModel
 {
-    public MovieEntity[] Movies { get; set; }
+    public List<MovieModel> Movies { get; set; }
 }

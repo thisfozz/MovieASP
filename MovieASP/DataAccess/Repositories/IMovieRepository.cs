@@ -1,9 +1,14 @@
 ﻿using MovieASP.DataAccess.Entities;
+using MovieASP.Models;
 
 namespace MovieASP.DataAccess.Repositories;
 
 public interface IMovieRepository
 {
-    MovieEntity[] GetAll();
-    MovieEntity GetById(int id);
+    List<MovieModel> GetAll();
+    MovieModel GetById(int id);
+
+    void Create(MovieModel model);
+    void Update(MovieModel model);
+    void Delete(int id);
 }

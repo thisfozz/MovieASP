@@ -1,0 +1,66 @@
+﻿@model MovieASP.Models.MovieModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+    <body>
+        <form method="post" asp-action="Edit" asp-controller="Movie">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Director"></label>
+                    <input asp-for="Director" class="form-control" />
+                    <span asp-validation-for="Director" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Genre"></label>
+                    <input asp-for="Genre" class="form-control" />
+                    <span asp-validation-for="Genre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <hr />
+                <h4>Sessions</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>CinemaId</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.Sessions.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input asp-for="@Model.Sessions[i].Time" class="form-control" />
+                                    <span asp-validation-for="@Model.Sessions[i].Time" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="@Model.Sessions[i].CinemaId" class="form-control" />
+                                    <span asp-validation-for="@Model.Sessions[i].CinemaId" class="text-danger"></span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </body>
+</html>

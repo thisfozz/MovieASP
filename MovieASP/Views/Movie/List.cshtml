@@ -1,4 +1,5 @@
-﻿@model MovieASP.Models.MoviesModel
+﻿@using MovieASP.Models
+@model List<MovieModel>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@
         <div class="container">
             <h2 class="mt-5 mb-4 text-center">@ViewData["Title"]</h2>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                    @foreach (var movie in Model.Movies)
+                    @foreach (var movie in Model)
                     {
                         <div class="col">
                             <div class="card h-100">
