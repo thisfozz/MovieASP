@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieASP.DataAccess.Entities;
 using MovieASP.DataAccess.Repositories;
 using MovieASP.Models;
 
@@ -17,14 +18,12 @@ public class MovieController : Controller
     }
 
     [Route("/")]
-    [HttpGet("list")]
     public IActionResult List()
     {
         ViewBag.Title = "Что мы показываем";
         return View("List", _movieRepository.GetAll());
     }
 
-    [HttpGet("movie")]
     public IActionResult GetById([FromQuery] int id)
     {
         var curentMovie = _movieRepository.GetById(id);
@@ -43,7 +42,7 @@ public class MovieController : Controller
             Genre = curentMovie.Genre,
             Image = curentMovie.Image,
             Description = curentMovie.Description,
-            Sessions = curentMovie.Sessions,
+            Sessions = curentMovie.Sessions
         };
 
         return View("MovieDetails", movieModel);
@@ -52,14 +51,14 @@ public class MovieController : Controller
     [HttpGet("create")]
     public IActionResult Create()
     {
-        return View("CreateProduct");
+        return View("CreateMovie");
     }
 
     [HttpPost("create")]
-    public IActionResult Create(MovieModel movieModel)
+    public IActionResult Create(MovieEntity movieModel)
     {
         _movieRepository.Create(movieModel);
-        return View("List", _movieRepository.GetAll());
+        return RedirectToAction("List");
     }
 
     [HttpGet("edit")]
@@ -85,7 +84,7 @@ public class MovieController : Controller
     }
 
     [HttpPost("edit")]
-    public IActionResult Edit(MovieModel movieModel)
+    public IActionResult Edit(MovieEntity movieModel)
     {
         _movieRepository.Update(movieModel);
         return RedirectToAction("List");
